@@ -1,3 +1,20 @@
+const cameraBtn      = document.getElementById('cameraBtn');
+const galleryBtn     = document.getElementById('galleryBtn');
+const catPhotoCamera = document.getElementById('catPhotoCamera');
+const catPhotoGallery= document.getElementById('catPhotoGallery');
+const photoChosen    = document.getElementById('photoChosen');
+let selectedPhoto = null;
+
+cameraBtn.addEventListener('click', () => catPhotoCamera.click());
+galleryBtn.addEventListener('click', () => catPhotoGallery.click());
+function onPhotoPicked(input) {
+  selectedPhoto = input.files[0] || null;
+  photoChosen.textContent = selectedPhoto ? '✓ ' + selectedPhoto.name : '';
+}
+catPhotoCamera.addEventListener('change', () => onPhotoPicked(catPhotoCamera));
+catPhotoGallery.addEventListener('change', () => onPhotoPicked(catPhotoGallery));
+
+// ↓↓↓ your existing code (Supabase connect, map, etc.) stays below ↓↓↓
 // ===== CONNECT TO SUPABASE =====
 const SUPABASE_URL = 'https://bzagsqinfqtdjkkrchaf.supabase.co';
 const SUPABASE_KEY = 'sb_publishable_rPuI1OBWdG1Wjyx52Wj8JA_tI-jDR_s';   // your full publishable key
@@ -77,7 +94,10 @@ function resetForm() {
   if (draftMarker) { map.removeLayer(draftMarker); draftMarker = null; }
   draftLatLng = null;
   document.getElementById('catName').value = '';
-  document.getElementById('catPhoto').value = '';
+  selectedPhoto = null;
+catPhotoCamera.value = '';
+catPhotoGallery.value = '';
+photoChosen.textContent = '';;
   catNotes.value = '';
   wordCount.textContent = '0 / 200 words';
 }
@@ -88,7 +108,7 @@ saveBtn.addEventListener('click', async () => {
   const name = document.getElementById('catName').value.trim();
   const notes = catNotes.value.trim();
   const words = notes.split(/\s+/).filter(Boolean);
-  const photoFile = document.getElementById('catPhoto').files[0];
+  const photoFile = selectedPhoto;
 
   if (!draftLatLng)       { alert('Tap the map to place the cat first!'); return; }
   if (!name)              { alert('Give the cat a name!'); return; }

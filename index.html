@@ -24,9 +24,14 @@
     <label for="catName">Name</label>
     <input id="catName" type="text" placeholder="e.g. Motu" />
 
-    <label for="catPhoto">Photo</label>
-    <input id="catPhoto" type="file" accept="image/*"/>
-
+   <label>Photo</label>
+<div class="photoRow">
+  <button type="button" id="cameraBtn">📷 Take photo</button>
+  <button type="button" id="galleryBtn">🖼️ Gallery</button>
+</div>
+<input id="catPhotoCamera"  type="file" accept="image/*" capture="environment" hidden />
+<input id="catPhotoGallery" type="file" accept="image/*" hidden />
+<div id="photoChosen"></div>
     <label for="catNotes">Notes</label>
     <textarea id="catNotes" rows="4" placeholder="Where she hangs out, her colour, her vibe..."></textarea>
     <small id="wordCount">0 / 200 words</small>
