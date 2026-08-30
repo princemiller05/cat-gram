@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cat-Gram</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="topbar">CAT<span>🐾</span>GRAM</div>
+  <div id="map"></div>
+
+  <button id="addBtn">＋ Add a cat</button>
+
+  <div id="formPanel" class="hidden">
+    <h3>New cat 🐈</h3>
+    <p id="placeHint">👉 Tap on the map where the cat is</p>
+
+    <label for="catName">Name</label>
+    <input id="catName" type="text" placeholder="e.g. Motu" />
+
+    <label for="catPhoto">Photo</label>
+    <input id="catPhoto" type="file" accept="image/*" capture="environment" />
+
+    <label for="catNotes">Notes</label>
+    <textarea id="catNotes" rows="4" placeholder="Where she hangs out, her colour, her vibe..."></textarea>
+    <small id="wordCount">0 / 200 words</small>
+
+    <div class="btnRow">
+      <button id="cancelBtn" type="button">Cancel</button>
+      <button id="saveBtn" type="button">Save cat 🐾</button>
+    </div>
+  </div>
+
+  <!-- libraries load FIRST -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <!-- our own code loads LAST, so L and supabase already exist -->
+  <script src="app.js"></script>
+</body>
+</html>
